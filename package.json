@@ -1,0 +1,19 @@
+{
+  "name": "cowinalert",
+  "version": "1.0.0",
+  "description": "cowin alert for pune district",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gg"
+  ],
+  "author": "H2cker",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "node-cron": "^2.0.3"
+  }
+}
