@@ -8,6 +8,7 @@ let alert = require('alert');
 //############ INPUTS #################################################### 
 let desriredPincode  = [ 411027, 411038,411011, 412115 ,411001];
 let date = "08-05-2021" ; //dd-mm-yyyy
+let interval = 5000;   //5 sec => 5000 , for 1sec => 1000 , 2sec => 2000  
 //##############################################################################
 
 
@@ -57,7 +58,7 @@ function intervalFunc() {
     getData();
 }
   
-  setInterval(intervalFunc, 5000);
+  setInterval(intervalFunc, interval);
 //cron.schedule('5 * * * * *',getData() );
 app.listen(3000,()=>{
     console.log("Server is running");
