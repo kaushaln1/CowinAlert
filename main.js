@@ -1,11 +1,16 @@
 var axios = require('axios');
 const cron = require('node-cron');
 const express = require('express');
-
+const fs = require('fs');
 app = express();
+let alert = require('alert');  
 
-
+//############ INPUTS #################################################### 
 let desriredPincode  = [ 411027, 411038,411011, 412115 ,411001];
+let date = "08-05-2021" ; //dd-mm-yyyy
+//##############################################################################
+
+
 
 let responseArray= [];
 async function getData(){
@@ -13,7 +18,7 @@ async function getData(){
    
     var config = {
         method: 'get',
-        url: 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=363&date=08-05-2021'
+        url: `https://cdn-api.co-vin.in/api/v2/appointment/sessions/calendarByDistrict?district_id=363&date=${date}`
       };
       
       axios(config)
@@ -25,10 +30,15 @@ async function getData(){
              if (desriredPincode.includes(dataArray[data].pincode ) &&  sessionData[0].min_age_limit!= 45 )
                 {
                         responseArray.push({ name: dataArray[data].name , pincode: dataArray[data].pincode , availaible: sessionData[0].available_capacity}  );
-                        if ( sessionData[0].available_capacity){
+                        if ( sessionData[0].available_capacity !=0 ){
                             // write to file 
-                            
-                            alert();
+                             var current = new Date();
+                            let DataString  = `${current} ===> Name : ${dataArray[data].name}  pincode: ${dataArray[data].pincode} availaible: ${sessionData[0].available_capacity} \n`; 
+                            fs.appendFile('data.txt',DataString , function (err) {
+                                if (err) throw err;
+                                console.log('Saved!');
+                              });
+                            alert(`Availiable at :=   ${DataString}`);
 
                         }
                 }
